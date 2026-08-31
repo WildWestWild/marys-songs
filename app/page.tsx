@@ -9,18 +9,9 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const asset = (path: string) => `${basePath}${path}`;
-
-const themes = [
-  { id: "velvet", number: "01", name: "Velvet Cinema", type: "Киноистория", swatch: ["#47111d", "#d6a082"] },
-  { id: "nordic", number: "02", name: "Nordic Letter", type: "Журнал", swatch: ["#e7e2d7", "#2e433c"] },
-  { id: "midnight", number: "03", name: "Midnight Glass", type: "Digital stage", swatch: ["#080a13", "#8176bf"] },
-  { id: "thread", number: "04", name: "Red Thread", type: "Арт-постер", swatch: ["#eee9df", "#d72c22"] },
-  { id: "blue", number: "05", name: "Blue Hour", type: "Dream pop", swatch: ["#122c4b", "#a4c9d9"] },
-] as const;
 
 const songs = [
   {
@@ -183,7 +174,6 @@ function TrackPlayer({ song }: { song: Song }) {
 }
 
 export default function Home() {
-  const [theme, setTheme] = useState<(typeof themes)[number]["id"]>("velvet");
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -199,7 +189,6 @@ export default function Home() {
     window.dispatchEvent(new Event("mary-player-stop"));
   }, [current]);
 
-  const activeTheme = themes.find((item) => item.id === theme) ?? themes[0];
   const activeSong = songs[current] ?? songs[0];
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
@@ -223,23 +212,9 @@ export default function Home() {
   };
 
   return (
-    <main className={`music-site theme-${theme} scene-${activeSong.id}`}>
-      <section className="concept-dock" aria-label="Выбор дизайн-концепции">
-        <div className="dock-intro"><span>Сравнение</span><strong>5 концепций сайта</strong></div>
-        <Tabs value={theme} onValueChange={(value) => setTheme(value as (typeof themes)[number]["id"])}>
-          <TabsList className="theme-tabs" aria-label="Шаблоны сайта">
-            {themes.map((item) => (
-              <TabsTrigger key={item.id} value={item.id} className="theme-tab">
-                <span className="swatch" style={{ background: `linear-gradient(135deg, ${item.swatch[0]} 50%, ${item.swatch[1]} 50%)` }} />
-                <span className="tab-copy"><small>{item.number}</small><b>{item.name}</b></span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-      </section>
-
-      <section className="experience" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
-        <div key={`${theme}-${activeSong.id}`} className="transition-veil" aria-hidden="true" />
+    <main className={`music-site theme-midnight scene-${activeSong.id}`}>
+      <section className="experience" style={{ height: "100vh" }} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+        <div key={activeSong.id} className="transition-veil" aria-hidden="true" />
         <div className="motion-layer" aria-hidden="true">
           <div className="motion-grid" /><div className="motion-scan" />
           <div className="motion-marquee">
@@ -249,7 +224,7 @@ export default function Home() {
         </div>
         <header className="site-header">
           <a className="artist-mark" href="#music" aria-label="Mary — к музыке">Mary<span>.</span></a>
-          <div className="concept-meta"><span>{activeTheme.number}</span><span>{activeTheme.name}</span><i>{activeTheme.type}</i></div>
+          <div className="concept-meta"><span>✦</span><span>Midnight Glass</span><i>Digital stage</i></div>
         </header>
 
         <Carousel setApi={setApi} opts={{ loop: true, duration: 38 }} className="world-carousel" id="music">
