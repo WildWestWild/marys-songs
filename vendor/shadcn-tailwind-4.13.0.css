@@ -1,0 +1,7 @@
+/*
+ * Compatibility stylesheet for the exported Mary’s Songs site.
+ *
+ * The original project imports this vendor file from app/globals.css.
+ * The site-specific styling lives in app/globals.css, so this file only
+ * needs to exist for the static GitHub Pages build to resolve the import.
+ */
