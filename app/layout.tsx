@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description:
     "Пять дизайн-концепций музыкального сайта, который полностью меняется вместе с песней.",
   icons: {
-    icon: "/marys-songs/favicon.svg",
-    shortcut: "/marys-songs/favicon.svg",
+    icon: "/marys-songs/favicon.svg?v=2",
+    shortcut: "/marys-songs/favicon.svg?v=2",
   },
 };
 
