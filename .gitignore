@@ -1,0 +1,78 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# Large media files are fetched during the Pages build.
+/public/tracks/*.mp3
+/public/mary-piesa-portrait-down.jpg
+/public/tvoy-privet-bg.png
+/public/nuzhen-bg.png
+/public/otpuskay-bg.png
+/public/elena-voss-portrait.png
+/public/mary-piesa-portrait.png
+
+# OpenAI Sites-only infrastructure is not needed by GitHub Pages.
+/.openai/
+/build/
+/db/
+/drizzle/
+/examples/
+/scripts/
+/tests/
+/vendor/
+/worker/
+/drizzle.config.ts
+/vite.config.ts
+/wrangler-env.d.ts
+
+# Keep only the UI primitives used by this site.
+/components/ui/*
+!/components/ui/button.tsx
+!/components/ui/carousel.tsx
+!/components/ui/tabs.tsx
+/app/chatgpt-auth.ts
+/hooks/
+/components.json
+/.npmrc
+/public/file.svg
+/public/globe.svg
+/public/window.svg
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+next-env.d.ts
+/dist/
+/.wrangler/
+/.sites-runtime/
+/outputs/
+/work/
