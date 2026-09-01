@@ -213,7 +213,7 @@ export default function Home() {
 
   return (
     <main className={`music-site theme-midnight scene-${activeSong.id}`}>
-      <section className="experience" style={{ height: "100vh" }} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+      <section className="experience" style={{ minHeight: "100vh" }} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
         <div key={activeSong.id} className="transition-veil" aria-hidden="true" />
         <div className="motion-layer" aria-hidden="true">
           <div className="motion-grid" /><div className="motion-scan" />
