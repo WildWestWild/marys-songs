@@ -1,0 +1,70 @@
+name: Deploy tasky-skills snapshot to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/deploy-tasky-preview-once.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tasky-skills
+        uses: actions/checkout@v4
+        with:
+          ref: tasky-skills
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download media assets
+        run: |
+          mkdir -p public/tracks
+          curl --fail --location --retry 3 --output public/mary-piesa-portrait-down.jpg https://marys-songs.mainmaxxx.chatgpt.site/mary-piesa-portrait-down.jpg
+          curl --fail --location --retry 3 --output public/tvoy-privet-bg.png https://marys-songs.mainmaxxx.chatgpt.site/tvoy-privet-bg.png
+          curl --fail --location --retry 3 --output public/nuzhen-bg.png https://marys-songs.mainmaxxx.chatgpt.site/nuzhen-bg.png
+          curl --fail --location --retry 3 --output public/otpuskay-bg.png https://marys-songs.mainmaxxx.chatgpt.site/otpuskay-bg.png
+          curl --fail --location --retry 3 --output public/tracks/mary-piesa.mp3 https://marys-songs.mainmaxxx.chatgpt.site/tracks/mary-piesa.mp3
+          curl --fail --location --retry 3 --output public/tracks/mary-tvoy-privet.mp3 https://marys-songs.mainmaxxx.chatgpt.site/tracks/mary-tvoy-privet.mp3
+          curl --fail --location --retry 3 --output public/tracks/mary-nuzhen.mp3 https://marys-songs.mainmaxxx.chatgpt.site/tracks/mary-nuzhen.mp3
+          curl --fail --location --retry 3 --output public/tracks/mary-otpuskay.mp3 https://marys-songs.mainmaxxx.chatgpt.site/tracks/mary-otpuskay.mp3
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
