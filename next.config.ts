@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
-// Empty for portable hosting; keep the existing GitHub Pages path by default.
-const basePath = process.env.SITE_BASE_PATH ?? "/marys-songs";
+// Custom domains and portable exports use the domain root.
+// GitHub Actions supplies the Pages base path from repository settings.
+const basePath = process.env.SITE_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   output: "export",

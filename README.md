@@ -39,8 +39,30 @@ npm run build:static
 ## GitHub Pages
 
 Сайт автоматически собирается и публикуется после обновления исходников в ветке `main`.
-Деплой создаёт две сборки: переносимую в `static/` и версию с префиксом `/marys-songs` в `out/` для GitHub Pages.
-Публичный адрес: https://wildwestwild.github.io/marys-songs/
+Деплой создаёт переносимую сборку в `static/` и сборку для GitHub Pages в `out/`.
+Путь для Pages автоматически берётся из настроек репозитория: после подключения собственного домена он пустой, до подключения — `/marys-songs`.
+По умолчанию локальная сборка также использует корень домена.
+
+### Подключение marymusic.ru
+
+1. В Settings → Pages → Custom domain укажите `marymusic.ru` и нажмите Save.
+2. В REG.RU настройте DNS на бесплатных серверах `ns1.reg.ru` и `ns2.reg.ru`:
+
+| Тип | Имя | Значение |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | wildwestwild.github.io |
+
+3. В Actions → Deploy Mary’s Songs to GitHub Pages → Run workflow запустите публикацию ветки `main`, чтобы сборка применила новый адрес.
+4. После проверки DNS и выпуска сертификата включите Enforce HTTPS в Settings → Pages.
+
+Целевой адрес: https://marymusic.ru/
+Старая ссылка https://wildwestwild.github.io/marys-songs/ после подключения домена перенаправляет на него.
+GitHub Pages автоматически выпускает TLS-сертификат; покупать и загружать сертификат REG.RU для Pages не требуется.
+Для деплоя через Actions файл `CNAME` не используется: домен задаётся в Settings → Pages.
 
 ## Локальный запуск
 

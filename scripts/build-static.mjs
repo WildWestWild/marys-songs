@@ -5,6 +5,10 @@ import { prepareMedia, root } from "./prepare-media.mjs";
 import { verifyStatic } from "./verify-static.mjs";
 
 await prepareMedia();
+// A previous Pages build may leave chunks with a different base path.
+// Clear generated intermediates, keeping the last verified static/ intact.
+await rm(join(root, "out"), { recursive: true, force: true });
+await rm(join(root, ".next"), { recursive: true, force: true });
 const result = spawnSync(process.execPath, [join(root, "node_modules/next/dist/bin/next"), "build"], {
   cwd: root,
   env: { ...process.env, SITE_BASE_PATH: "" },
