@@ -18,7 +18,7 @@ const songs = [
     id: "piece",
     number: "01",
     title: "Пьеса",
-    artist: "Mary",
+    artist: "Мэри",
     eyebrow: "Акт I · роли и недосказанность",
     statement: "Если историю нельзя завершить, её превращают в пьесу.",
     description: "Музыкант и поэтесса остаются героями общего сюжета: главные слова почти произнесены, но страх всё ещё прячется в паузах. Визуал строится как сцена после спектакля.",
@@ -32,7 +32,7 @@ const songs = [
     id: "greeting",
     number: "02",
     title: "Твой привет",
-    artist: "Mary",
+    artist: "Мэри",
     eyebrow: "Акт II · знак сквозь снег",
     statement: "Один короткий знак — и прошлое возвращается снегом.",
     description: "Героиня пытается уйти, сохранить себя и отпустить другую жизнь. Но редкий привет снова приближает человека, которого невозможно заменить, — почти встреча, в которую трудно поверить.",
@@ -46,7 +46,7 @@ const songs = [
     id: "needed",
     number: "03",
     title: "Нужен",
-    artist: "Mary",
+    artist: "Мэри",
     eyebrow: "Акт III · сила притяжения",
     statement: "Эксперимент становится единственной необходимостью.",
     description: "Обаятельный импульс превращается в яркую, наивную и почти опасную близость. Здесь любовь — магнитное поле: хочется отдать душу и признать, что нужен только один человек.",
@@ -60,7 +60,7 @@ const songs = [
     id: "release",
     number: "04",
     title: "Отпускай",
-    artist: "Mary",
+    artist: "Мэри",
     eyebrow: "Акт IV · воздух после точки",
     statement: "Иногда любовь остаётся случайным сном — и просит отпустить.",
     description: "Старый сюжет возвращается ненадолго, чтобы раствориться между строк. Повтор становится внутренним решением: забывать не из холода, а чтобы наконец освободить пространство для света.",
@@ -218,12 +218,12 @@ export default function Home() {
         <div className="motion-layer" aria-hidden="true">
           <div className="motion-grid" /><div className="motion-scan" />
           <div className="motion-marquee">
-            <span>MARY · {activeSong.title} · MARY · {activeSong.title} ·&nbsp;</span>
-            <span>MARY · {activeSong.title} · MARY · {activeSong.title} ·&nbsp;</span>
+            <span>МЭРИ · {activeSong.title} · МЭРИ · {activeSong.title} ·&nbsp;</span>
+            <span>МЭРИ · {activeSong.title} · МЭРИ · {activeSong.title} ·&nbsp;</span>
           </div>
         </div>
         <header className="site-header">
-          <a className="artist-mark" href="#music" aria-label="Mary — к музыке">Mary<span>.</span></a>
+          <a className="artist-mark" href="#music" aria-label="Мэри — к музыке">Мэри<span>.</span></a>
           <div className="concept-meta"><span>✦</span><span>Midnight Glass</span><i>Digital stage</i></div>
         </header>
 

@@ -487,6 +487,10 @@ a {
   top: 19%;
 }
 
+.song-piece .line-one {
+  top: 7%;
+}
+
 .line-two {
   width: 1px;
   height: 35%;
