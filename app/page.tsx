@@ -66,8 +66,8 @@ const songs = [
     description: "Старый сюжет возвращается ненадолго, чтобы раствориться между строк. Повтор становится внутренним решением: забывать не из холода, а чтобы наконец освободить пространство для света.",
     tags: ["ветер", "между строк", "свобода"],
     audio: asset("/tracks/mary-otpuskay.mp3"),
-    image: asset("/otpuskay-bg.png"),
-    imagePosition: "center center",
+    image: asset("/otpuskay-sky-grouse.png"),
+    imagePosition: "72% center",
     yandex: "https://music.yandex.ru/search?text=%D0%9C%D1%8D%D1%80%D0%B8%20%D0%9E%D1%82%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B9",
   },
 ] as const;

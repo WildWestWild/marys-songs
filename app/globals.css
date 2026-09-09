@@ -2318,7 +2318,7 @@ a {
   animation: need-line 4.5s ease-in-out infinite;
 }
 
-/* 04 — release: typography floats over a bright horizon and then disappears. */
+/* 04 — release: left-aligned lyrics leave the open sky and bird in view. */
 .song-release,
 .theme-nordic .song-release,
 .theme-midnight .song-release,
@@ -2326,8 +2326,9 @@ a {
 .theme-blue .song-release {
   display: grid;
   grid-template-columns: 1fr;
-  place-items: center;
-  text-align: center;
+  align-items: center;
+  justify-items: start;
+  text-align: left;
   isolation: isolate;
 }
 
@@ -2359,40 +2360,42 @@ a {
 }
 
 .song-release .portrait {
+  filter: var(--image-filter) brightness(0.72);
   animation: release-drift 16s ease-in-out infinite alternate;
 }
 
 .song-release .image-wash {
-  background: radial-gradient(circle at center, transparent 5%, color-mix(in srgb, var(--bg) 35%, transparent) 62%, var(--bg) 128%);
+  background:
+    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 32%, transparent 68%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 35%, transparent), transparent 24% 72%, var(--bg));
   mix-blend-mode: normal;
   opacity: 0.88;
 }
 
 .song-release .song-copy {
-  width: min(820px, 68vw);
-  padding: 27px 40px 31px;
-  background: color-mix(in srgb, var(--bg) 61%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 160px 160px 16px 16px;
-  backdrop-filter: blur(23px);
+  width: min(640px, 53vw);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  backdrop-filter: none;
 }
 
 .song-release .song-copy h1 {
-  font-size: clamp(64px, 8.5vw, 140px);
+  font-size: clamp(64px, 7.4vw, 124px);
 }
 
 .song-release .song-index,
 .song-release .statement,
 .song-release .mood-tags {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .song-release .statement,
 .song-release .song-description,
 .song-release .mood-tags,
 .song-release .player-zone {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .song-release .song-description {
@@ -2411,7 +2414,19 @@ a {
 }
 
 .song-release .scene-line {
-  display: none;
+  opacity: 0.72;
+}
+
+.song-release .line-one {
+  width: 34%;
+  left: 5%;
+  top: 14%;
+}
+
+.song-release .line-two {
+  height: 26%;
+  right: 5%;
+  bottom: 15%;
 }
 
 .song-release .ghost-title {
@@ -2539,7 +2554,7 @@ a {
   }
 
   .song-release .song-copy {
-    width: min(760px, 76vw);
+    width: min(640px, 64vw);
   }
 }
 
@@ -2904,7 +2919,7 @@ a {
   }
 
   .song-release .portrait {
-    object-position: 64% center !important;
+    object-position: 78% center !important;
   }
 
   .song-needed .image-wash,
@@ -2933,6 +2948,18 @@ a {
     width: 42%;
     left: 0;
     top: 13%;
+  }
+
+  .song-release .line-one {
+    width: 36%;
+    left: 0;
+    top: 7%;
+  }
+
+  .song-release .line-two {
+    height: 28%;
+    right: 3%;
+    bottom: 5%;
   }
 
   .line-two {
