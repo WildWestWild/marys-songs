@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "node scripts/build-static.mjs",
+    "media:prepare": "node scripts/prepare-media.mjs",
     "start": "next start",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next"
   },

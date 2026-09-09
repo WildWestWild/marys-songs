@@ -32,7 +32,10 @@
 /db/
 /drizzle/
 /examples/
-/scripts/
+/scripts/*
+!/scripts/build-static.mjs
+!/scripts/prepare-media.mjs
+!/scripts/verify-static.mjs
 /tests/
 /vendor/
 /worker/

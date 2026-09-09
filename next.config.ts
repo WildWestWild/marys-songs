@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
-const basePath = "/marys-songs";
+// Empty for portable hosting; keep the existing GitHub Pages path by default.
+const basePath = process.env.SITE_BASE_PATH ?? "/marys-songs";
 
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   basePath,
-  assetPrefix: `${basePath}/`,
   images: {
     unoptimized: true,
   },

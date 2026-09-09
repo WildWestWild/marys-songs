@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "Mary’s Songs",
   description:
     "Пять дизайн-концепций музыкального сайта, который полностью меняется вместе с песней.",
   icons: {
-    icon: "/marys-songs/favicon.svg?v=2",
-    shortcut: "/marys-songs/favicon.svg?v=2",
+    icon: `${basePath}/favicon.svg?v=2`,
+    shortcut: `${basePath}/favicon.svg?v=2`,
   },
 };
 
