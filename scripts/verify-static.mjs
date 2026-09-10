@@ -6,7 +6,7 @@ import { mediaPaths, root } from "./prepare-media.mjs";
 
 export async function verifyStatic(directory = join(root, "static")) {
   const html = await readFile(join(directory, "index.html"), "utf8");
-  assert(html.includes("Mary"), "Missing site content");
+  assert(html.includes("Мэри"), "Missing site content");
   for (const path of ["/favicon.svg", ...await mediaPaths()]) {
     assert((await stat(join(directory, path))).size > 0, `Missing asset: ${path}`);
   }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, CSSProperties, PointerEvent as ReactPointerEvent } from "react";
-import { ArrowLeft, ArrowRight, ExternalLink, Pause, Play, Quote, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Pause, Play } from "lucide-react";
 import {
   Carousel,
   CarouselApi,
@@ -22,53 +22,49 @@ const songs = [
     eyebrow: "Акт I · роли и недосказанность",
     statement: "Если историю нельзя завершить, её превращают в пьесу.",
     description: "Музыкант и поэтесса остаются героями общего сюжета: главные слова почти произнесены, но страх всё ещё прячется в паузах. Визуал строится как сцена после спектакля.",
-    tags: ["театр", "пауза", "двое"],
     audio: asset("/tracks/mary-piesa.mp3"),
     image: asset("/mary-piesa-portrait-down.jpg"),
     imagePosition: "50% 24%",
-    yandex: "https://music.yandex.ru/album/37510352/track/141214890",
-  },
-  {
-    id: "greeting",
-    number: "02",
-    title: "Твой привет",
-    artist: "Мэри",
-    eyebrow: "Акт II · знак сквозь снег",
-    statement: "Один короткий знак — и прошлое возвращается снегом.",
-    description: "Героиня пытается уйти, сохранить себя и отпустить другую жизнь. Но редкий привет снова приближает человека, которого невозможно заменить, — почти встреча, в которую трудно поверить.",
-    tags: ["снег", "сигнал", "возвращение"],
-    audio: asset("/tracks/mary-tvoy-privet.mp3"),
-    image: asset("/tvoy-privet-bg.png"),
-    imagePosition: "center center",
-    yandex: "https://music.yandex.ru/search?text=%D0%9C%D1%8D%D1%80%D0%B8%20%D0%A2%D0%B2%D0%BE%D0%B9%20%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82",
+    yandex: "https://music.yandex.ru/album/37510352/track/141214890?utm_source=web&utm_medium=copy_link",
   },
   {
     id: "needed",
-    number: "03",
+    number: "02",
     title: "Нужен",
     artist: "Мэри",
-    eyebrow: "Акт III · сила притяжения",
+    eyebrow: "Акт II · сила притяжения",
     statement: "Эксперимент становится единственной необходимостью.",
     description: "Обаятельный импульс превращается в яркую, наивную и почти опасную близость. Здесь любовь — магнитное поле: хочется отдать душу и признать, что нужен только один человек.",
-    tags: ["притяжение", "уязвимость", "пульс"],
     audio: asset("/tracks/mary-nuzhen.mp3"),
     image: asset("/nuzhen-bg.png"),
     imagePosition: "center center",
-    yandex: "https://music.yandex.ru/search?text=%D0%9C%D1%8D%D1%80%D0%B8%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD",
+    yandex: "https://music.yandex.ru/album/35465280/track/136262659?utm_source=web&utm_medium=copy_link",
   },
   {
     id: "release",
-    number: "04",
+    number: "03",
     title: "Отпускай",
     artist: "Мэри",
-    eyebrow: "Акт IV · воздух после точки",
+    eyebrow: "Акт III · воздух после точки",
     statement: "Иногда любовь остаётся случайным сном — и просит отпустить.",
     description: "Старый сюжет возвращается ненадолго, чтобы раствориться между строк. Повтор становится внутренним решением: забывать не из холода, а чтобы наконец освободить пространство для света.",
-    tags: ["ветер", "между строк", "свобода"],
     audio: asset("/tracks/mary-otpuskay.mp3"),
     image: asset("/otpuskay-sky-grouse.png"),
     imagePosition: "72% center",
-    yandex: "https://music.yandex.ru/search?text=%D0%9C%D1%8D%D1%80%D0%B8%20%D0%9E%D1%82%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B9",
+    yandex: "https://music.yandex.ru/album/35465280/track/136262660?utm_source=web&utm_medium=copy_link",
+  },
+  {
+    id: "greeting",
+    number: "04",
+    title: "Твой привет",
+    artist: "Мэри",
+    eyebrow: "Акт IV · знак сквозь снег",
+    statement: "Один короткий знак — и прошлое возвращается снегом.",
+    description: "Героиня пытается уйти, сохранить себя и отпустить другую жизнь. Но редкий привет снова приближает человека, которого невозможно заменить, — почти встреча, в которую трудно поверить.",
+    audio: asset("/tracks/mary-tvoy-privet.mp3"),
+    image: asset("/tvoy-privet-bg.png"),
+    imagePosition: "center center",
+    yandex: "https://music.yandex.ru/album/35465280/track/136262661?utm_source=web&utm_medium=copy_link",
   },
 ] as const;
 
@@ -149,7 +145,7 @@ function TrackPlayer({ song }: { song: Song }) {
       </button>
       <div className="player-copy">
         <div className="player-heading">
-          <span><Sparkles aria-hidden="true" /> {song.artist}</span>
+          <span>{song.artist}</span>
           <strong>{song.title}</strong>
         </div>
         <div className="timeline">
@@ -224,7 +220,6 @@ export default function Home() {
         </div>
         <header className="site-header">
           <a className="artist-mark" href="#music" aria-label="Мэри — к музыке">Мэри<span>.</span></a>
-          <div className="concept-meta"><span>✦</span><span>Midnight Glass</span><i>Digital stage</i></div>
         </header>
 
         <Carousel setApi={setApi} opts={{ loop: true, duration: 38 }} className="world-carousel" id="music">
@@ -245,11 +240,8 @@ export default function Home() {
                     <div className="song-index"><span>{song.number}</span><i>—</i><span>0{songs.length}</span></div>
                     <p className="song-eyebrow">{song.eyebrow}</p>
                     <h1>{song.title}</h1>
-                    <div className="statement"><Quote aria-hidden="true" /><p>{song.statement}</p></div>
+                    <div className="statement"><p>{song.statement}</p></div>
                     <p className="song-description">{song.description}</p>
-                    <div className="mood-tags" aria-label="Образы песни">
-                      {song.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                    </div>
                     <div className="player-zone"><TrackPlayer song={song} /></div>
                   </div>
                 </article>
@@ -266,7 +258,6 @@ export default function Home() {
         </Carousel>
 
         <footer className="track-rail">
-          <span className="rail-label">Песни</span>
           <div className="track-links">
             {songs.map((song, index) => (
               <button key={song.id} className={index === current ? "active" : ""} type="button" onClick={() => api?.scrollTo(index)} aria-current={index === current ? "true" : undefined}>
@@ -274,7 +265,6 @@ export default function Home() {
               </button>
             ))}
           </div>
-          <span className="swipe-hint">Листайте экран →</span>
         </footer>
       </section>
     </main>

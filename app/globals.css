@@ -782,6 +782,10 @@ a {
   transition: color 200ms ease;
 }
 
+.track-links button:last-child {
+  border-right: 1px solid var(--line);
+}
+
 .track-links button::after {
   content: "";
   height: 2px;
@@ -3351,4 +3355,151 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Keep every text block on one shared reading axis across song layouts. */
+.song-copy,
+.song-dawn .song-copy {
+  text-align: left;
+}
+
+.song-copy .song-index,
+.song-copy .statement {
+  justify-content: flex-start;
+}
+
+.song-copy .statement,
+.song-copy .song-description,
+.song-copy .player-zone {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Scale the wide title against the card itself so it can never spill out. */
+.song-needed .song-copy {
+  container-type: inline-size;
+  width: min(100%, 720px);
+}
+
+.song-needed .song-copy h1 {
+  max-width: 100%;
+  font-size: clamp(52px, 23cqw, 104px);
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+
+/* 02 follows the full-bleed composition of 03: image behind, copy card above. */
+.song-greeting,
+.theme-nordic .song-greeting,
+.theme-midnight .song-greeting,
+.theme-thread .song-greeting,
+.theme-blue .song-greeting {
+  isolation: isolate;
+}
+
+.song-greeting .visual-stage,
+.theme-midnight .song-greeting .visual-stage {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 1;
+  transform: none;
+}
+
+.song-greeting .portrait-frame,
+.theme-nordic .song-greeting .portrait-frame,
+.theme-midnight .song-greeting .portrait-frame,
+.theme-thread .song-greeting .portrait-frame,
+.theme-blue .song-greeting .portrait-frame {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.song-greeting .image-wash {
+  background:
+    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 30%, transparent 78%),
+    linear-gradient(180deg, transparent 52%, var(--bg) 116%);
+  mix-blend-mode: normal;
+  opacity: 0.94;
+}
+
+.song-greeting .song-copy,
+.theme-nordic .song-greeting .song-copy,
+.theme-midnight .song-greeting .song-copy,
+.theme-thread .song-greeting .song-copy,
+.theme-blue .song-greeting .song-copy {
+  grid-column: 1;
+  grid-row: 1;
+  width: min(100%, 650px);
+  padding: 30px 34px;
+  background: color-mix(in srgb, var(--bg) 68%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  box-shadow: none;
+  backdrop-filter: blur(22px);
+}
+
+.song-greeting .ghost-title {
+  right: auto;
+  bottom: 1%;
+  left: 50%;
+  font-size: clamp(96px, 16vw, 260px);
+  opacity: 0.1;
+  animation: none;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 760px) {
+  .song-greeting .song-copy,
+  .theme-nordic .song-greeting .song-copy,
+  .theme-midnight .song-greeting .song-copy,
+  .theme-thread .song-greeting .song-copy,
+  .theme-blue .song-greeting .song-copy {
+    width: 100%;
+    margin-top: 150px;
+    padding: 24px 18px;
+    order: 2;
+    border-radius: 26px;
+  }
+
+  .song-greeting .ghost-title {
+    bottom: 4%;
+    font-size: clamp(68px, 18vw, 110px);
+  }
+}
+
+/* New 04 artwork: keep the dissolving portrait on the right and copy legible left. */
+.song-release .portrait {
+  object-position: 72% center !important;
+  filter: saturate(0.82) contrast(1.06) brightness(0.9);
+}
+
+.song-release .image-wash {
+  background:
+    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 28%, transparent 66%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 22%, transparent), transparent 22% 72%, var(--bg));
+  mix-blend-mode: normal;
+  opacity: 0.82;
+}
+
+/* Stack artist above the track title consistently in every player. */
+.player-heading {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.player-heading strong {
+  max-width: 100%;
 }
