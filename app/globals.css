@@ -3503,3 +3503,61 @@ a {
 .player-heading strong {
   max-width: 100%;
 }
+
+/* Keep the laptop presentation visually rich without continuously repainting it. */
+@media (min-width: 761px) and (max-width: 1728px) and (hover: hover) and (pointer: fine) {
+  .music-site.laptop-mode .experience {
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+    --copy-x: 0px;
+    --copy-y: 0px;
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+  }
+
+  .music-site.laptop-mode .visual-stage,
+  .music-site.laptop-mode .song-copy {
+    transition-property: none;
+  }
+
+  .music-site.laptop-mode .transition-veil {
+    display: none;
+  }
+
+  .music-site.laptop-mode .experience::before,
+  .music-site.laptop-mode .experience::after,
+  .music-site.laptop-mode .motion-layer::before,
+  .music-site.laptop-mode .motion-layer::after,
+  .music-site.laptop-mode .motion-scan {
+    filter: none;
+  }
+
+  .music-site.laptop-mode .song-copy,
+  .music-site.laptop-mode .player-zone,
+  .music-site.laptop-mode .edge-arrow,
+  .music-site.laptop-mode .track-rail,
+  .music-site.laptop-mode .mood-tags span {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .music-site.laptop-mode .motion-layer::before,
+  .music-site.laptop-mode .motion-layer::after,
+  .music-site.laptop-mode .motion-grid,
+  .music-site.laptop-mode .motion-scan,
+  .music-site.laptop-mode .motion-marquee,
+  .music-site.laptop-mode .motion-marquee span,
+  .music-site.laptop-mode .portrait,
+  .music-site.laptop-mode .scene-orbit,
+  .music-site.laptop-mode .scene-line,
+  .music-site.laptop-mode .ghost-title {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .music-site.laptop-mode .world-slide:not(.is-active) *,
+  .music-site.laptop-mode .world-slide:not(.is-active) *::before,
+  .music-site.laptop-mode .world-slide:not(.is-active) *::after {
+    animation-play-state: paused !important;
+  }
+}

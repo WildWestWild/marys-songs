@@ -12,6 +12,7 @@ import {
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const asset = (path: string) => `${basePath}${path}`;
+const laptopMediaQuery = "(min-width: 761px) and (max-width: 1728px) and (hover: hover) and (pointer: fine)";
 
 const songs = [
   {
@@ -172,6 +173,17 @@ function TrackPlayer({ song }: { song: Song }) {
 export default function Home() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [isLaptopMode, setIsLaptopMode] = useState(false);
+  const experienceRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(laptopMediaQuery);
+    const syncLaptopMode = () => setIsLaptopMode(mediaQuery.matches);
+
+    syncLaptopMode();
+    mediaQuery.addEventListener("change", syncLaptopMode);
+    return () => mediaQuery.removeEventListener("change", syncLaptopMode);
+  }, []);
 
   useEffect(() => {
     if (!api) return;
@@ -185,10 +197,20 @@ export default function Home() {
     window.dispatchEvent(new Event("mary-player-stop"));
   }, [current]);
 
+  useEffect(() => {
+    if (!isLaptopMode || !experienceRef.current) return;
+    experienceRef.current.style.setProperty("--parallax-x", "0px");
+    experienceRef.current.style.setProperty("--parallax-y", "0px");
+    experienceRef.current.style.setProperty("--copy-x", "0px");
+    experienceRef.current.style.setProperty("--copy-y", "0px");
+    experienceRef.current.style.setProperty("--pointer-x", "50%");
+    experienceRef.current.style.setProperty("--pointer-y", "50%");
+  }, [isLaptopMode]);
+
   const activeSong = songs[current] ?? songs[0];
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (isLaptopMode || window.matchMedia("(pointer: coarse)").matches) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
@@ -208,8 +230,8 @@ export default function Home() {
   };
 
   return (
-    <main className={`music-site theme-midnight scene-${activeSong.id}`}>
-      <section className="experience" style={{ minHeight: "100vh" }} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+    <main className={`music-site theme-midnight scene-${activeSong.id}${isLaptopMode ? " laptop-mode" : ""}`}>
+      <section ref={experienceRef} className="experience" style={{ minHeight: "100vh" }} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
         <div key={activeSong.id} className="transition-veil" aria-hidden="true" />
         <div className="motion-layer" aria-hidden="true">
           <div className="motion-grid" /><div className="motion-scan" />
@@ -222,10 +244,10 @@ export default function Home() {
           <a className="artist-mark" href="#music" aria-label="Мэри — к музыке">Мэри<span>.</span></a>
         </header>
 
-        <Carousel setApi={setApi} opts={{ loop: true, duration: 38 }} className="world-carousel" id="music">
+        <Carousel setApi={setApi} opts={{ loop: true, duration: isLaptopMode ? 24 : 38 }} className="world-carousel" id="music">
           <CarouselContent className="world-track">
-            {songs.map((song) => (
-              <CarouselItem className="world-slide" key={song.id}>
+            {songs.map((song, index) => (
+              <CarouselItem className={`world-slide${index === current ? " is-active" : ""}`} key={song.id}>
                 <article className={`song-world song-${song.id}`}>
                   <div className="visual-stage" aria-hidden="true">
                     <div className="portrait-frame">
