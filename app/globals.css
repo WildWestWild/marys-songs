@@ -2377,11 +2377,12 @@ a {
 }
 
 .song-release .song-copy {
-  width: min(640px, 53vw);
-  padding: 0;
-  background: transparent;
-  border: 0;
-  backdrop-filter: none;
+  width: min(100%, 720px);
+  padding: 30px 34px;
+  background: color-mix(in srgb, var(--bg) 68%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 2px 56px 2px 2px;
+  backdrop-filter: blur(22px);
 }
 
 .song-release .song-copy h1 {
