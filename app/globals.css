@@ -2408,6 +2408,7 @@ a {
 
 .song-release .player-zone {
   width: min(100%, 650px);
+  border: 1px solid var(--line);
 }
 
 .song-release .scene-orbit {
@@ -3460,16 +3461,61 @@ a {
 }
 
 @media (max-width: 760px) {
+  .song-greeting .visual-stage,
+  .theme-midnight .song-greeting .visual-stage {
+    width: 100%;
+    height: 286px;
+    min-height: 286px;
+    margin: 0;
+    position: relative;
+    inset: auto;
+    order: 1;
+    flex: 0 0 286px;
+    align-self: stretch;
+    z-index: 1;
+    opacity: 1;
+    transform: none;
+  }
+
+  .song-greeting .portrait-frame,
+  .theme-nordic .song-greeting .portrait-frame,
+  .theme-midnight .song-greeting .portrait-frame,
+  .theme-thread .song-greeting .portrait-frame,
+  .theme-blue .song-greeting .portrait-frame {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: 0 22px 62px rgba(0, 0, 0, 0.26);
+    transform: none;
+  }
+
+  .theme-thread .song-greeting .portrait-frame {
+    border: 4px solid var(--ink);
+    border-radius: 0;
+    box-shadow: 8px 8px 0 var(--accent);
+  }
+
+  .song-greeting .portrait {
+    object-position: 66% center !important;
+  }
+
   .song-greeting .song-copy,
   .theme-nordic .song-greeting .song-copy,
   .theme-midnight .song-greeting .song-copy,
   .theme-thread .song-greeting .song-copy,
   .theme-blue .song-greeting .song-copy {
     width: 100%;
-    margin-top: 150px;
-    padding: 24px 18px;
+    margin: 0;
+    padding: 2px 2px 0;
     order: 2;
-    border-radius: 26px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
   }
 
   .song-greeting .ghost-title {
