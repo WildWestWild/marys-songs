@@ -2377,6 +2377,7 @@ a {
 }
 
 .song-release .song-copy {
+  container-type: inline-size;
   width: min(100%, 720px);
   padding: 30px 34px;
   background: color-mix(in srgb, var(--bg) 68%, transparent);
@@ -2386,7 +2387,8 @@ a {
 }
 
 .song-release .song-copy h1 {
-  font-size: clamp(64px, 7.4vw, 124px);
+  max-width: 100%;
+  font-size: clamp(64px, 17.5cqw, 112px);
 }
 
 .song-release .song-index,
