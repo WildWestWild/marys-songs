@@ -349,6 +349,62 @@ a {
   color: var(--accent);
 }
 
+.service-links {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.service-link {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: color 250ms ease, background 250ms ease,
+    border-color 250ms ease, transform 180ms ease;
+}
+
+.service-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+.service-yandex svg {
+  width: 23px;
+  height: 23px;
+}
+
+.service-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .service-link:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--accent) 16%, var(--bg));
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .service-links {
+    gap: 4px;
+  }
+
+  .service-link {
+    border-radius: 10px;
+  }
+}
+
 .concept-meta {
   display: flex;
   align-items: center;
