@@ -1,15 +1,38 @@
 import type { Metadata, Viewport } from "next";
+import { musicGroupJsonLd, siteDescription, siteTitle, siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 export const metadata: Metadata = {
-  title: "Мэри",
-  description:
-    "Пять дизайн-концепций музыкального сайта, который полностью меняется вместе с песней.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
   icons: {
-    icon: `${basePath}/favicon.svg?v=2`,
-    shortcut: `${basePath}/favicon.svg?v=2`,
+    icon: "/favicon.svg?v=2",
+    shortcut: "/favicon.svg?v=2",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: siteTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -27,6 +50,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(musicGroupJsonLd()) }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -7,7 +7,16 @@ import { mediaPaths, root } from "./prepare-media.mjs";
 export async function verifyStatic(directory = join(root, "static")) {
   const html = await readFile(join(directory, "index.html"), "utf8");
   assert(html.includes("Мэри"), "Missing site content");
-  for (const path of ["/favicon.svg", ...await mediaPaths()]) {
+  assert(!html.includes("Пять дизайн-концепций"), "Stale prototype description still present");
+  assert(html.includes("Официальный сайт Мэри. Музыка и события"), "Missing site description");
+  assert(html.includes("og:title"), "Missing Open Graph title");
+  assert(html.includes("og:description"), "Missing Open Graph description");
+  assert(html.includes("https://marymusic.ru/og-image.jpg"), "Missing absolute Open Graph image");
+  assert(html.includes("twitter:card"), "Missing Twitter card");
+  assert(html.includes("summary_large_image"), "Missing large image card type");
+  assert(html.includes("application/ld+json"), "Missing JSON-LD");
+  assert(html.includes("MusicGroup"), "Missing MusicGroup schema");
+  for (const path of ["/favicon.svg", "/og-image.jpg", "/robots.txt", "/sitemap.xml", ...await mediaPaths()]) {
     assert((await stat(join(directory, path))).size > 0, `Missing asset: ${path}`);
   }
   const references = [...html.matchAll(/(?:src|href)="(\/[^"]+)"/g)];
