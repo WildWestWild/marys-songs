@@ -90,7 +90,7 @@ const songs = [
     statement: "Один знак — и прошлое возвращается",
     description: "Можно уйти в другую жизнь и сохранить себя, но мысли снова будут приближать другого человека, которого невозможно заменить, — почти встреча, в которую трудно поверить.",
     audio: asset("/tracks/mary-tvoy-privet.mp3"),
-    image: asset("/tvoy-privet-bg.png"),
+    image: asset("/tvoy-privet-bg-detail.png"),
     imagePosition: "center center",
     yandex: "https://music.yandex.ru/album/35465280/track/136262661?utm_source=web&utm_medium=copy_link",
   },
