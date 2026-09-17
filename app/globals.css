@@ -3604,4 +3604,27 @@ a {
   .music-site.laptop-mode .world-slide:not(.is-active) *::after {
     animation-play-state: paused !important;
   }
+
+  /* 02 — need: the static laptop line is anchored to the card so it always sits above it. */
+  .music-site.laptop-mode .song-needed .line-one {
+    display: none;
+  }
+
+  .music-site.laptop-mode .song-needed .song-copy::before {
+    content: "";
+    width: 42vw;
+    height: 1px;
+    position: absolute;
+    left: calc(4vw - clamp(74px, 8vw, 138px));
+    top: -22px;
+    background: var(--accent);
+    opacity: 0.72;
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1120px) and (hover: hover) and (pointer: fine) {
+  .music-site.laptop-mode .song-needed .song-copy::before {
+    left: calc(4vw - 92px);
+  }
 }
