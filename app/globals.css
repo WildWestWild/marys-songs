@@ -3597,9 +3597,11 @@ a {
   .music-site.laptop-mode .world-slide:not(.is-active) *::after {
     animation-play-state: paused !important;
   }
+}
 
-  /* Нужен: keep the accent stripe in the header gap, not through the player card. */
-  .music-site.laptop-mode .song-needed .line-one {
-    top: 64px;
+/* Laptop width: keep the Нужен accent stripe above the player, not through it. */
+@media (min-width: 821px) and (max-width: 1728px) {
+  .song-needed .line-one {
+    top: 86px;
   }
 }
