@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { ArrowLeft, ArrowRight, ExternalLink, Pause, Play } from "lucide-react";
+import { trackPageView } from "@/lib/metrika";
 import {
   Carousel,
   CarouselApi,
@@ -214,7 +215,20 @@ export default function Home() {
 
   useEffect(() => {
     if (!api) return;
-    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    let previousIndex = api.selectedScrollSnap();
+    let previousUrl = window.location.href;
+    const onSelect = () => {
+      const index = api.selectedScrollSnap();
+      setCurrent(index);
+      // The counter's init already records the initial page view.
+      if (index === previousIndex) return;
+      previousIndex = index;
+      const song = songs[index];
+      const url = new URL(window.location.href);
+      url.hash = `song/${song.id}`;
+      trackPageView(url.href, `Мэри — ${song.title}`, previousUrl);
+      previousUrl = url.href;
+    };
     onSelect();
     api.on("select", onSelect);
     return () => { api.off("select", onSelect); };
