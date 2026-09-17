@@ -3541,6 +3541,13 @@ a {
   max-width: 100%;
 }
 
+/* Keep the needed scene's horizontal accent above the card on laptops. */
+@media (min-width: 821px) and (max-width: 1728px) and (hover: hover) and (pointer: fine) {
+  .music-site.laptop-mode .song-needed .line-one {
+    top: 70px;
+  }
+}
+
 /* Keep the laptop presentation visually rich without continuously repainting it. */
 @media (min-width: 761px) and (max-width: 1728px) and (hover: hover) and (pointer: fine) {
   .music-site.laptop-mode .experience {
