@@ -239,6 +239,51 @@ export default function Home() {
   }, [current]);
 
   useEffect(() => {
+    const experience = experienceRef.current;
+    if (!experience) return;
+    const slides = [...experience.querySelectorAll<HTMLElement>(".world-slide")];
+    const rail = experience.querySelector<HTMLElement>(".track-rail");
+    const desktop = window.matchMedia("(min-width: 1121px)");
+    let frame = 0;
+    let disposed = false;
+
+    const measure = () => {
+      for (const slide of slides) {
+        const article = slide.querySelector<HTMLElement>(".song-world");
+        const copy = slide.querySelector<HTMLElement>(".song-copy");
+        if (!article || !copy) continue;
+        // Ignore decorative image layers; reserve space for the navigation below.
+        const contentBottom = article.offsetTop + copy.offsetTop + copy.offsetHeight;
+        const clearance = (rail?.offsetHeight ?? 76) + 20;
+        const needsScroll = desktop.matches && contentBottom + clearance > slide.clientHeight + 1;
+        slide.dataset.scrollable = String(needsScroll);
+        slide.style.setProperty("--slide-scroll-end", `${contentBottom + clearance}px`);
+        if (!needsScroll) slide.scrollTop = 0;
+      }
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
+    const observer = new ResizeObserver(schedule);
+    slides.forEach((slide) => {
+      observer.observe(slide);
+      const copy = slide.querySelector(".song-copy");
+      if (copy) observer.observe(copy);
+    });
+    if (rail) observer.observe(rail);
+    window.addEventListener("resize", schedule);
+    document.fonts.ready.then(() => { if (!disposed) schedule(); });
+    measure();
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isLaptopMode || !experienceRef.current) return;
     experienceRef.current.style.setProperty("--parallax-x", "0px");
     experienceRef.current.style.setProperty("--parallax-y", "0px");

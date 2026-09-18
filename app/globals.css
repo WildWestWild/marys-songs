@@ -3621,3 +3621,96 @@ a {
     left: calc(4vw - 92px);
   }
 }
+
+/* Preserve slide geometry, but allow overflowing content to scroll vertically. */
+.music-site .world-carousel > [data-slot="carousel-content"] {
+  overflow: clip;
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (min-width: 1121px) {
+  .music-site,
+  .music-site .experience {
+    /* Clipping must not create hidden scroll containers that steal focus scrolling. */
+    overflow: clip;
+  }
+
+  .music-site .world-slide {
+    position: relative;
+    overflow: clip;
+    scroll-padding-block: 82px 96px;
+  }
+
+  .music-site .world-slide[data-scrollable="true"] {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .music-site .world-slide[data-scrollable="true"] .visual-stage {
+    /* Animated decoration must not enlarge the usable content's scroll range. */
+    contain: paint;
+  }
+
+  .music-site .world-slide[data-scrollable="true"]::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--slide-scroll-end) - 1px);
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+}
+
+/* Transparent tracks and subdued thumbs, with no permanently reserved gutter. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(165 158 190 / 24%) transparent;
+}
+
+.music-site .world-slide {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 24%, transparent) transparent;
+}
+
+.music-site .world-slide:hover {
+  scrollbar-color: color-mix(in srgb, var(--accent) 40%, transparent) transparent;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html,
+  .music-site .world-slide {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  .music-site .world-slide:hover {
+    scrollbar-color: auto;
+  }
+
+  html::-webkit-scrollbar,
+  .music-site .world-slide::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  html::-webkit-scrollbar-track,
+  .music-site .world-slide::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: rgb(165 158 190 / 24%);
+    border-radius: 999px;
+  }
+
+  .music-site .world-slide::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--accent) 24%, transparent);
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover,
+  .music-site .world-slide::-webkit-scrollbar-thumb:hover {
+    background: rgb(165 158 190 / 48%);
+  }
+}
