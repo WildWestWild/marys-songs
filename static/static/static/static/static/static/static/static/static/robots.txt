@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://marymusic.ru
+Sitemap: https://marymusic.ru/sitemap.xml
